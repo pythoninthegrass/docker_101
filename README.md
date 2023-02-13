@@ -40,7 +40,8 @@ Docker Hub is a cloud-based repository in which Docker users and partners create
 Automated CI is implemented via GitHub Actions to build and push this repository's image to Docker Hub in `.github/workflows/docker.yml`.
 
 ### What you need to modify in this file
-* Add a repository secret for `DOCKERHUB_TOKEN` and environment variable `DOCKERHUB_USER` on this repository on GitHub.
+* Add repository secrets for `DOCKERHUB_TOKEN` and `DOCKERHUB_USER` on this repository on GitHub.
+* Add the `DOCKERHUB_IMAGE` repository environment variable.
   * Here are the [instructions to create a token](https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token).
 * Here are the [instructions to disable this action](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow) if you don't want this feature.
 
