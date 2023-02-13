@@ -7,6 +7,11 @@ app = FastAPI()
 
 
 @app.get("/")
-async def read_root():
+async def indext():
     message = f"Hello world! From FastAPI running on Uvicorn with Gunicorn. Using Python {version}"  # noqa
     return {"message": message}
+
+
+@app.get("/message/{msg}")
+async def read_item(msg: str):
+    return {"message": msg}

@@ -1,8 +1,14 @@
 #!/usr/bin/env sh
 
-export VIRTUAL_ENV="/opt/venv"
-export PATH="${VIRTUAL_ENV}/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+# shellcheck disable=SC1091,SC2034,SC2153,SC3037,SC3045,SC2046
 
-# source .venv/bin/activate
+if [ "$(uname -s)" = "Darwin" ]; then
+	export VENV=".venv"
+else
+	export VENV="/opt/venv"
+fi
+export PATH="${VENV}/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
-gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app -b 0.0.0.0:${PORT:-3000} --log-file -
+# . "${VENV}/bin/activate"
+
+gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app -b "0.0.0.0:${PORT:-3000}" --log-file -
