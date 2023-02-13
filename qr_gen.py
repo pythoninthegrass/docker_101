@@ -5,5 +5,5 @@ from pyqrcode import QRCode
 
 home = str(Path.home())
 
-url = QRCode("https://github.com/pythoninthegrass/python_template")
+url = QRCode("https://github.com/pythoninthegrass/docker_101")
 url.png(Path(f"{home}/Downloads/repo.png"), scale=8)

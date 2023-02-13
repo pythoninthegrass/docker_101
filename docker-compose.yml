@@ -1,17 +1,29 @@
 version: "3.9"
 
 services:
-  app:
-    container_name: hello-cont
-    image: docker_python
-    tty: false               # false for `entrypoint` in Dockerfile
-    stdin_open: false        # false for `entrypoint` in Dockerfile
+  helloworld:
+    container_name: helloworld-cont
+    image: helloworld
+    tty: false          # false for `entrypoint` in Dockerfile
+    stdin_open: false   # false for `entrypoint` in Dockerfile
     env_file:
       - ./.env
+    args: DEBIAN_FRONTEND=noninteractive
+    environment:
+      - PIP_DISABLE_PIP_VERSION_CHECK=on
+      - PIP_DEFAULT_TIMEOUT=100
+      - POETRY_HOME="/opt/poetry"
+      - POETRY_VERSION=1.3.2
+      - VENV="/opt/venv"
+      - PATH="$POETRY_HOME/bin:$VENV/bin:$PATH"
     volumes:
-      - .:/home/appuser/app
+      - .:/app
     ports:
       - 3000:3000
     build:
       context: ./
       dockerfile: ./Dockerfile
+
+networks:
+  default:
+    driver: bridge

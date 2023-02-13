@@ -2,6 +2,42 @@
 
 * Install from the [Setup](../README.md#setup) section
 * Usage
+  * Docker
+    ```bash
+    # show running containers
+    docker ps
+
+    # show images
+    docker images
+
+    # build docker image and tag
+    docker build -t helloworld .
+
+    # run image with interactive tty and remove container after
+    docker run -it --rm helloworld
+
+    # run image with volume mount and map port
+    docker run -it --rm -v $(pwd):/app -p 3000:3000 helloworld
+
+    # run image in background (detached) with shortened name 'hello'
+    docker run -it -d --name hello helloworld
+
+    # exec into container
+    docker attach hello
+
+    # stop container
+    docker stop hello
+
+    # show all containers
+    docker ps -a
+
+    # remove volume
+    docker rm -v <container_sha>
+
+    # clean up images
+    docker rmi helloworld
+    ```
+  * Docker Compose
     ```bash
     # clean build (remove `--no-cache` for speed)
     docker-compose build --no-cache --parallel
@@ -11,9 +47,6 @@
 
     # exec into container
     docker attach hello
-
-    # run command inside container
-    python hello.py
 
     # stop container
     docker-compose stop
