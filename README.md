@@ -3,7 +3,7 @@
 <!-- <img src="https://user-images.githubusercontent.com/4097471/144654508-823c6e31-5e10-404c-9f9f-0d6b9d6ce617.jpg" width="300"> -->
 
 ## Summary
-
+Docker presentation and demo for Python in the Grass 🐍 🌱
 
 ### Caveat Emptor
 Very little of this gets tested on Windows hosts. Windows Subsystem for Linux (WSL) is used where necessary with the default Ubuntu LTS install. Moved bulk of document to the [markdown](markdown/) directory to opt-in vs. opt-out of documentation.
@@ -40,12 +40,9 @@ Docker Hub is a cloud-based repository in which Docker users and partners create
 Automated CI is implemented via GitHub Actions to build and push this repository's image to Docker Hub in `.github/workflows/docker.yml`.
 
 ### What you need to modify in this file
-
-* Look for `images: your-username/your-image-name` and change to your respective Docker Hub username and image name.
 * Add a repository secret for `DOCKERHUB_TOKEN` and environment variable `DOCKERHUB_USER` on this repository on GitHub.
   * Here are the [instructions to create a token](https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token).
-
-Here are the [instructions to disable this action](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow) if you don't want this feature.
+* Here are the [instructions to disable this action](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow) if you don't want this feature.
 
 ## TODO
 * [Open Issues](https://github.com/pythoninthegrass/python_template/issues)
