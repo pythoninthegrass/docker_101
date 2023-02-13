@@ -1,4 +1,4 @@
-name: push
+name: docker
 
 on: push
 
@@ -11,7 +11,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: your-username/your-image-name
+          images: ${{ env.DOCKERHUB_USER }}/${{ env.DOCKERHUB_IMAGE }}
           tags: |
             type=ref,prefix=dev-,event=branch
             type=semver,pattern={{version}}
@@ -22,7 +22,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ env.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         id: docker_build
