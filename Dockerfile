@@ -37,4 +37,6 @@ EXPOSE 3000
 
 # ENTRYPOINT ["python", "main.py"]
 # CMD ["default", "arg"]
-CMD ["/bin/bash"]
+# CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
+CMD ["/bin/sh", "startup.sh"]
+# CMD ["/bin/bash"]

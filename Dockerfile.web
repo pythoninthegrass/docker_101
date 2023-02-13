@@ -84,7 +84,11 @@ COPY --from=builder --chown=${USER_NAME} "$VENV" "$VENV"
 
 USER ${USER_NAME}
 
+# map port 3000 to host
+EXPOSE 3000
+
 # ENTRYPOINT ["python", "main.py"]
-# CMD ["gunicorn", "-c", "config/gunicorn.conf.py", "main:app"]
+# CMD ["default", "arg"]
+# CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
 CMD ["/bin/sh", "startup.sh"]
-# CMD ["/bin/sh"]
+# CMD ["/bin/bash"]
