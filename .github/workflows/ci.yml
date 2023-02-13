@@ -12,6 +12,7 @@ on:
     branches:
       - "main"
 
+# TODO: test vars in-line vs. global env
 env:
   docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
   app_name: ${{ vars.APP_NAME }}
@@ -29,6 +30,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           # list of Docker images to use as base name for tags
+          # TODO: see above ^^
           images: |
             ${{ env.docker_user }}/${{ env.app_name }}
           # generate Docker tags based on the following events/attributes

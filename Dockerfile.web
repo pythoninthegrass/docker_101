@@ -4,7 +4,7 @@
 # https://github.com/python-poetry/poetry/discussions/1879#discussioncomment-216865
 
 # full semver just for python base image
-ARG PYTHON_VERSION=3.10.9
+ARG PYTHON_VERSION=3.11.1
 
 FROM python:${PYTHON_VERSION}-slim-bullseye AS builder
 
@@ -41,8 +41,7 @@ COPY . .
 RUN python -m venv $VENV \
     && . "${VENV}/bin/activate" \
     && python -m pip install "poetry==${POETRY_VERSION}" \
-    && poetry install --no-ansi --without dev \
-    && poetry export -f requirements.txt --output requirements.txt --without-hashes
+    && poetry install --no-ansi --no-root --without dev
 
 FROM python:${PYTHON_VERSION}-slim-bullseye AS runner
 
@@ -84,11 +83,11 @@ COPY --from=builder --chown=${USER_NAME} "$VENV" "$VENV"
 
 USER ${USER_NAME}
 
-# map port 3000 to host
+# listening port (not published)
 EXPOSE 3000
 
 # ENTRYPOINT ["python", "main.py"]
-# CMD ["default", "arg"]
+ENTRYPOINT ["/bin/sh", "startup.sh"]
+# CMD ["5000"]
 # CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
-CMD ["/bin/sh", "startup.sh"]
 # CMD ["/bin/bash"]

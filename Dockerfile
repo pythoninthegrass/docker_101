@@ -32,11 +32,11 @@ RUN python -m venv $VENV && . "${VENV}/bin/activate"
 RUN python -m pip install "poetry==${POETRY_VERSION}"
 RUN poetry install --no-ansi --no-root --without dev
 
-# map port 3000 to host
+# listening port (not published)
 EXPOSE 3000
 
 # ENTRYPOINT ["python", "main.py"]
-# CMD ["default", "arg"]
+ENTRYPOINT ["/bin/sh", "startup.sh"]
+CMD ["5000"]
 # CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
-CMD ["/bin/sh", "startup.sh"]
 # CMD ["/bin/bash"]
