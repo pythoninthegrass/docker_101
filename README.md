@@ -37,13 +37,18 @@ Development environments and tooling are first-class citizens on macOS and *nix.
 ## Pushing to Docker Hub with CI
 Docker Hub is a cloud-based repository in which Docker users and partners create, test, store and distribute container images. Docker images are pushed to Docker Hub through the `docker push` command. A single Docker Hub repository can hold many Docker images (stored as tags).
 
-Automated CI is implemented via GitHub Actions to build and push this repository's image to Docker Hub in `.github/workflows/docker.yml`.
+Automated CI is implemented via GitHub Actions to build and push this repository's image to Docker Hub in `.github/workflows/ci.yml`.
 
 ### What you need to modify in this file
-* Add repository secrets for `DOCKERHUB_TOKEN` and `DOCKERHUB_USER` on this repository on GitHub.
-* Add the `DOCKERHUB_IMAGE` repository environment variable.
-  * Here are the [instructions to create a token](https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token).
-* Here are the [instructions to disable this action](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow) if you don't want this feature.
+* Add repository secrets (Docker Hub)
+  * `DOCKERHUB_TOKEN`
+  * `DOCKERHUB_USER`
+* Add environment variable (image name)
+  * `APP_NAME` 
+
+[Instructions to create a token](https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token).
+
+[Instructions to disable this action](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow) if you don't want this feature.
 
 ## TODO
 * [Open Issues](https://github.com/pythoninthegrass/python_template/issues)
