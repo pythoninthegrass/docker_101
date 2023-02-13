@@ -1,13 +1,12 @@
-# See https://just.systems/man/en
+# https://just.systems/man/en
 
 # load .env
 set dotenv-load
 
 # set env var
-export APP      := "docker-101"
-export SHELL    := "/bin/bash"
-export TAG      := "latest"
-export SCRIPT   := "scheduler.sh"
+export IMAGE	:= `echo ${REGISTRY_URL}`
+export SHELL	:= "/bin/bash"
+VERSION 		:= `cat VERSION`
 
 # x86_64/arm64
 arch := `uname -m`
@@ -15,78 +14,85 @@ arch := `uname -m`
 # hostname
 host := `uname -n`
 
-# halp
+# [halp]   list available commands
 default:
-    just --list
+	just --list
 
-# lint sh script
-checkbash:
-    #!/usr/bin/env bash
-    checkbashisms {{SCRIPT}}
-    if [[ $? -eq 1 ]]; then
-        echo "bashisms found. Exiting..."
-        exit 1
-    else
-        echo "No bashisms found"
-    fi
+# [docker] build locally
+build:
+	#!/usr/bin/env bash
+	echo "building ${APP_NAME}:${TAG}"
+	if [[ {{arch}} == "arm64" ]]; then
+		docker build -f Dockerfile.web -t ${APP_NAME} --build-arg CHIPSET_ARCH=aarch64-linux-gnu .
+	else
+		docker build -f Dockerfile.web -t ${APP_NAME} --build-arg CHIPSET_ARCH=x86_64-linux-gnu .
+	fi
+	echo "created tag ${APP_NAME}:${TAG} {{IMAGE}}/${APP_NAME}:${TAG}"
 
-# build locally or on intel box
-build: checkbash
-    #!/usr/bin/env bash
-    set -euxo pipefail
-    if [[ {{arch}} == "arm64" ]]; then
-        docker build -f Dockerfile.web -t {{TAG}} --build-arg CHIPSET_ARCH=aarch64-linux-gnu .
-    else
-        docker build -f Dockerfile.web --progress=plain -t {{TAG}} .
-    fi
+# [docker] intel build
+buildx:
+	docker buildx build -f Dockerfile --progress=plain -t ${TAG} --build-arg CHIPSET_ARCH=x86_64-linux-gnu --load .
 
-# intel build over ssh, then push to heroku
-buildx: checkbash
-    docker buildx build -f Dockerfile.web --progress=plain -t {{TAG}} --build-arg CHIPSET_ARCH=x86_64-linux-gnu --load .
+# [docker] build w/docker-compose defaults
+build-clean:
+	#!/usr/bin/env bash
+	if [[ {{arch}} == "arm64" ]]; then
+		docker-compose build --pull --no-cache --build-arg CHIPSET_ARCH=aarch64-linux-gnu
+	else
+		docker-compose build --pull --no-cache --build-arg CHIPSET_ARCH=x86_64-linux-gnu
+	fi
 
-# release to heroku
-release: buildx
-    heroku container:release web --app ${HEROKU_APP}
+# [docker] login to registry (exit code 127 == 0)
+login:
+	#!/usr/bin/env bash
+	# set -euxo pipefail
+	echo "Log into ${REGISTRY_URL} as ${USER_NAME}. Please enter your password: "
+	cmd=$(docker login --username ${USER_NAME} ${REGISTRY_URL})
+	if [[ $("$cmd" >/dev/null 2>&1; echo $?) -ne 127 ]]; then
+		echo 'Not logged into Docker. Exiting...'
+		exit 1
+	fi
 
-# arm build w/docker-compose defaults (no push due to arm64)
-build-clean: checkbash
-    docker-compose build --pull --no-cache --build-arg CHIPSET_ARCH=aarch64-linux-gnu --parallel
+# [docker] tag image as latest
+tag-latest:
+	@echo "create tag ${APP_NAME}:${TAG} {{IMAGE}}/${APP_NAME}:${TAG}"
+	docker tag ${APP_NAME}:${TAG} {{IMAGE}}/${APP_NAME}:${TAG}
 
-# kick off a build on heroku from ci
-push:
-    git push heroku main -f
+# TODO: QA
+# [docker] tag latest image from VERSION file
+tag-version:
+	@echo "create tag ${APP_NAME}:{{VERSION}} {{IMAGE}}/${APP_NAME}:{{VERSION}}"
+	docker tag ${APP_NAME} {{IMAGE}}/${APP_NAME}:{{VERSION}}
 
-# pull latest image
-pull:
-    #!/usr/bin/env bash
-    set -euxo pipefail
-    if [[ $(heroku auth:whoami 2>&1 | awk '/Error/ {$1=""; print $0}' | xargs) = "Error: not logged in" ]]; then
-        echo 'Not logged into Heroku. Logging in now...'
-        heroku auth:login
-        heroku container:login
-    fi
-    docker pull {{TAG}}
+# [docker] push latest image
+push: login
+	docker push {{IMAGE}}/${APP_NAME}:${TAG}
 
-# start docker-compose container
+# [docker] pull latest image
+pull: login
+	docker pull {{IMAGE}}/${APP_NAME}
+
+# [docker] run container
+run: build
+	docker run --rm -it \
+	--name ${APP_NAME} \
+	--env-file .env \
+	-v $(pwd):/app \
+	-p ${PORT}:${PORT} \
+	"${APP_NAME}"
+
+# [docker] start docker-compose container
 start:
-    docker-compose up -d
+	docker-compose up -d
 
-# run container
-run:
-    docker run --rm -it \
-    --env-file .env \
-    -p 3000:3000 \
-    -v $(pwd):/app \
-    --name {{APP}} {{TAG}} {{SHELL}}
-
-# ssh into container
+# [docker] ssh into container
 exec:
-    docker exec -it {{APP}} {{SHELL}}
+	docker-compose exec ${APP_NAME} {{SHELL}}
 
-# stop docker-compose container
+# [docker] stop docker-compose container
 stop:
-    docker-compose stop
+	docker-compose stop
 
-# remove docker-compose container(s) and networks
-down:
-    docker-compose stop && docker-compose down --remove-orphans
+# [docker] remove docker-compose container(s) and networks
+down: stop
+	docker-compose down --remove-orphans
