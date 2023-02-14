@@ -52,14 +52,16 @@ poetry install --no-root
 ### Run the application
 ```bash
 # poetry
-poetry run startup.sh <override_port>
+poetry run ./startup.sh <override_port> # ctrl-c to exit
 
 # just
-just run    # ctrl-c to exit
+just run                                # ctrl-c to exit
+just exec                               # ctrl-d to exit
 
 # docker
 docker build -t hello-world -f Dockerfile.web .
 docker run -it --rm -p 80:5000 hello-world
+docker exec -it hello-world bash
 
 # docker-compose
 docker-compose build --no-cache --parallel

@@ -4,8 +4,11 @@
 set dotenv-load
 
 # set env var
-export IMAGE	:= `echo ${REGISTRY_URL}`
+export APP      := `echo ${APP_NAME}`
+export IMAGE	:= `echo ${IMAGE}`
+export SCRIPT   := "startup.sh"
 export SHELL	:= "/bin/bash"
+export TAG		:= `git rev-parse --short HEAD`
 VERSION 		:= `cat VERSION`
 
 # x86_64/arm64
@@ -18,29 +21,30 @@ host := `uname -n`
 default:
 	just --list
 
-# [docker] build locally
-build:
-	#!/usr/bin/env bash
-	echo "building ${APP_NAME}:${TAG}"
-	if [[ {{arch}} == "arm64" ]]; then
-		docker build -f Dockerfile.web -t ${APP_NAME} --build-arg CHIPSET_ARCH=aarch64-linux-gnu .
-	else
-		docker build -f Dockerfile.web -t ${APP_NAME} --build-arg CHIPSET_ARCH=x86_64-linux-gnu .
-	fi
-	echo "created tag ${APP_NAME}:${TAG} {{IMAGE}}/${APP_NAME}:${TAG}"
+# lint sh script
+checkbash:
+    #!/usr/bin/env bash
+    checkbashisms {{SCRIPT}}
+    if [[ $? -eq 1 ]]; then
+        echo "bashisms found. Exiting..."
+        exit 1
+    else
+        echo "No bashisms found"
+    fi
 
-# [docker] intel build
-buildx:
-	docker buildx build -f Dockerfile --progress=plain -t ${TAG} --build-arg CHIPSET_ARCH=x86_64-linux-gnu --load .
+# [checkbash] build locally or on intel box
+build: checkbash
+    #!/usr/bin/env bash
+    set -euxo pipefail
+    if [[ {{arch}} == "arm64" ]]; then
+        docker build -f Dockerfile.web -t {{APP}} --build-arg CHIPSET_ARCH=aarch64-linux-gnu .
+    else
+        docker build -f Dockerfile.web --progress=plain -t {{APP}} .
+    fi
 
-# [docker] build w/docker-compose defaults
-build-clean:
-	#!/usr/bin/env bash
-	if [[ {{arch}} == "arm64" ]]; then
-		docker-compose build --pull --no-cache --build-arg CHIPSET_ARCH=aarch64-linux-gnu
-	else
-		docker-compose build --pull --no-cache --build-arg CHIPSET_ARCH=x86_64-linux-gnu
-	fi
+# [docker] arm build w/docker-compose defaults
+build-clean: checkbash
+    docker-compose build --pull --no-cache --build-arg CHIPSET_ARCH=aarch64-linux-gnu --parallel
 
 # [docker] login to registry (exit code 127 == 0)
 login:
@@ -55,39 +59,40 @@ login:
 
 # [docker] tag image as latest
 tag-latest:
-	@echo "create tag ${APP_NAME}:${TAG} {{IMAGE}}/${APP_NAME}:${TAG}"
-	docker tag ${APP_NAME}:${TAG} {{IMAGE}}/${APP_NAME}:${TAG}
+	docker tag {{APP}}:latest {{IMAGE}}/{{APP}}:latest
 
-# TODO: QA
 # [docker] tag latest image from VERSION file
 tag-version:
-	@echo "create tag ${APP_NAME}:{{VERSION}} {{IMAGE}}/${APP_NAME}:{{VERSION}}"
-	docker tag ${APP_NAME} {{IMAGE}}/${APP_NAME}:{{VERSION}}
+	@echo "create tag {{APP}}:{{VERSION}} {{IMAGE}}/{{APP}}:{{VERSION}}"
+	docker tag {{APP}} {{IMAGE}}/{{APP}}:{{VERSION}}
 
 # [docker] push latest image
 push: login
-	docker push {{IMAGE}}/${APP_NAME}:${TAG}
+	docker push {{IMAGE}}/{{APP}}:{{TAG}}
 
 # [docker] pull latest image
 pull: login
-	docker pull {{IMAGE}}/${APP_NAME}
+	docker pull {{IMAGE}}/{{APP}}
 
 # [docker] run container
 run: build
+	#!/usr/bin/env bash
+	# set -euxo pipefail
 	docker run --rm -it \
-	--name ${APP_NAME} \
+	--name {{APP}} \
 	--env-file .env \
+	-h ${HOST:-localhost} \
 	-v $(pwd):/app \
-	-p ${PORT}:${PORT} \
-	"${APP_NAME}"
+	-p ${OVER_PORT:-$PORT}:${OVER_PORT:-$PORT} \
+	"{{APP}}"
 
 # [docker] start docker-compose container
 start:
 	docker-compose up -d
 
-# [docker] ssh into container
+# ssh into container
 exec:
-	docker-compose exec ${APP_NAME} {{SHELL}}
+    docker exec -it {{APP}} {{SHELL}}
 
 # [docker] stop docker-compose container
 stop:

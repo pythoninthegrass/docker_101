@@ -4,8 +4,8 @@ services:
   helloworld:
     container_name: hello-world
     image: hello-world
-    tty: true          # false for `entrypoint` in Dockerfile
-    stdin_open: true   # false for `entrypoint` in Dockerfile
+    tty: false          # false for `entrypoint` in Dockerfile
+    stdin_open: false   # false for `entrypoint` in Dockerfile
     env_file:
       - ./.env
     environment:
