@@ -18,6 +18,8 @@ Very little of this gets tested on Windows hosts. Windows Subsystem for Linux (W
     * [Mac and Linux users](#mac-and-linux-users)
     * [Create virtual environment](#create-virtual-environment)
     * [Run the application](#run-the-application)
+      * [CLI bits](#cli-bits)
+      * [Clicky-clicky](#clicky-clicky)
   * [Pushing to Docker Hub with CI](#pushing-to-docker-hub-with-ci)
     * [What you need to modify in this file](#what-you-need-to-modify-in-this-file)
   * [TODO](#todo)
@@ -50,7 +52,7 @@ poetry install --no-root
 ```
 
 ### Run the application
-Copy the `.env.example` file to `.env` and modify the values as needed.
+#### CLI bits
 ```bash
 # poetry
 poetry run ./startup.sh <override_port>         # ctrl-c to exit
@@ -74,6 +76,14 @@ just build-clean                                # docker-compose build --no-cach
 just up                                         # docker-compose up -d
 just down                                       # docker-compose down --remove-orphans
 ```
+#### Clicky-clicky
+Copy the `.env.example` file to `.env` and modify the values as needed.
+
+Default port is `3000`. If you want to override the port, pass it as an argument to the `startup.sh` script.
+
+Open a browser to either the override port or the default port to see the application running (e.g. `http://localhost:3000`).
+
+Available endpoints are `/docs` and `/message/{msg}`; latter encodes whitespace as `%20` automatically.
 
 ## Pushing to Docker Hub with CI
 Docker Hub is a cloud-based repository in which Docker users and partners create, test, store and distribute container images. Docker images are pushed to Docker Hub through the `docker push` command. A single Docker Hub repository can hold many Docker images (stored as tags).
