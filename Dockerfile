@@ -1,10 +1,12 @@
+#! can parametrize with build-arg
 FROM python:3.11-slim-bullseye
 
 # avoid stuck build due to user prompt
 ARG DEBIAN_FRONTEND=noninteractive
 
+# ! missing arg, 2 layers, no multi-stage
 # install dependencies
-RUN apt -qq update && apt -qq install curl gcc python3-dev -y
+RUN apt -qq update && apt -qq install curl gcc lsof python3-dev
 RUN rm -rf /var/lib/apt/lists/*
 
 # pip env vars
@@ -21,20 +23,29 @@ ENV POETRY_NO_INTERACTION=1
 ENV VENV="/opt/venv"
 ENV PATH="$POETRY_HOME/bin:$VENV/bin:$PATH"
 
+#! extra layer
 # working directory (creates dir if it doesn't exist)
+RUN mkdir -p /app
 WORKDIR /app
 
 # copy all files from current dir to working dir
 COPY . .
 
+#! extra layers
 # install poetry and dependencies
 RUN python -m venv $VENV && . "${VENV}/bin/activate"
 RUN python -m pip install "poetry==${POETRY_VERSION}"
 RUN poetry install --no-ansi --no-root --without dev
 
-# map port 3000 to host
+#! hard-coded port
+# listening port (not published)
 EXPOSE 3000
 
+#! runs as root, no custom PATH (poetry, python)
+
+#! hard-coded port
 # ENTRYPOINT ["python", "main.py"]
-# CMD ["default", "arg"]
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/sh", "startup.sh"]
+CMD ["5000"]
+# CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
+# CMD ["/bin/bash"]
