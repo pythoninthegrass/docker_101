@@ -53,11 +53,7 @@ poetry install --no-root
 Copy the `.env.example` file to `.env` and modify the values as needed.
 ```bash
 # poetry
-poetry run ./startup.sh <override_port> # ctrl-c to exit
-
-# just
-just run                                # ctrl-c to exit
-just exec                               # ctrl-d to exit
+poetry run ./startup.sh <override_port>         # ctrl-c to exit
 
 # docker
 docker build -t hello-world -f Dockerfile.web .
@@ -68,6 +64,15 @@ docker exec -it hello-world bash
 docker-compose build --no-cache --parallel
 docker-compose up -d
 docker-compose down --remove-orphans
+
+# justfile
+## docker
+just run                                        # ctrl-c to exit
+just exec                                       # ctrl-d to exit
+## docker-compose
+just build-clean                                # docker-compose build --no-cache --parallel
+just up                                         # docker-compose up -d
+just down                                       # docker-compose down --remove-orphans
 ```
 
 ## Pushing to Docker Hub with CI

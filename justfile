@@ -87,7 +87,7 @@ run: build
 	"{{APP}}"
 
 # [docker] start docker-compose container
-start:
+up:
 	docker-compose up -d
 
 # ssh into container
