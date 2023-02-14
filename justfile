@@ -21,7 +21,7 @@ host := `uname -n`
 default:
 	just --list
 
-# lint sh script
+# [check]  lint sh script
 checkbash:
     #!/usr/bin/env bash
     checkbashisms {{SCRIPT}}
@@ -32,7 +32,7 @@ checkbash:
         echo "No bashisms found"
     fi
 
-# [checkbash] build locally or on intel box
+# [docker] build locally or on intel box
 build: checkbash
     #!/usr/bin/env bash
     set -euxo pipefail
@@ -90,7 +90,7 @@ run: build
 up:
 	docker-compose up -d
 
-# ssh into container
+# [docker] ssh into container
 exec:
     docker exec -it {{APP}} {{SHELL}}
 
