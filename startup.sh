@@ -11,26 +11,26 @@ export PATH="${VENV}/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
 # . "${VENV}/bin/activate"
 
-# TODO: cleanup (case statement?)
+move_port() {
+	echo "Port $1 is in use, trying $PORT"
+	while [ ! -z "$(lsof -i :$PORT | grep LISTEN | awk '{print $2}')" ]; do
+		echo "Port $PORT is in use, trying $((PORT+1))"
+		PORT=$((PORT+1))
+	done
+	echo "Port $PORT is available. Using it instead of $1"
+}
+
 port_check() {
-	if [ ! -z "$1" ] && [ -z "$(lsof -i :$1 | grep LISTEN | awk '{print $2}')" ]; then
+	if [ -z "$1" ]; then
+		PORT=3000
+	elif [ "$1" -gt 0 ] 2>/dev/null; then
 		PORT="$1"
-	elif [ ! -z "$1" ] && [ ! -z "$(lsof -i :$1 | grep LISTEN | awk '{print $2}')" ]; then
-		PORT=$(($1+1))
-		echo "Port $1 is in use, trying $PORT"
-		while [ ! -z "$(lsof -i :$PORT | grep LISTEN | awk '{print $2}')" ]; do
-			echo "Port $PORT is in use, trying $((PORT+1))"
-			PORT=$((PORT+1))
-		done
-		echo "Port $PORT is available. Using it instead of $1"
-	else
-		echo "Failed to find available port. $1 is in use. Exiting... "
-		exit 1
 	fi
+	[ -z "$(lsof -i :$PORT | grep LISTEN | awk '{print $2}')" ] || move_port "$PORT"
 }
 
 main() {
 	port_check "$@"
-	gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app -b "0.0.0.0:${PORT:-3000}" --log-file -
+	gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app -b "0.0.0.0:${PORT}" --log-file -
 }
 main "$@"
