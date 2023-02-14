@@ -13,7 +13,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - ${PORT-5000}:${PORT-5000}
+      - ${OVER_PORT:-$PORT}:${OVER_PORT:-$PORT}
     build:
       context: ./
       dockerfile: ./Dockerfile.web

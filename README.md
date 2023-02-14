@@ -50,6 +50,7 @@ poetry install --no-root
 ```
 
 ### Run the application
+Copy the `.env.example` file to `.env` and modify the values as needed.
 ```bash
 # poetry
 poetry run ./startup.sh <override_port> # ctrl-c to exit
