@@ -6,7 +6,7 @@
 Docker presentation and demo for Python in the Grass 🐍 🌱
 
 ### Caveat Emptor
-Very little of this gets tested on Windows hosts. Windows Subsystem for Linux (WSL) is used where necessary with the default Ubuntu LTS install. Moved bulk of document to the [markdown](markdown/) directory to opt-in vs. opt-out of documentation.
+Very little of this gets tested on Windows hosts. Windows Subsystem for Linux (WSL) is used where necessary with the default Ubuntu LTS install. Moved bulk of document to the [docs](docs/) directory to opt-in vs. opt-out of documentation.
 
 
 **Table of Contents**
@@ -57,8 +57,8 @@ poetry run ./startup.sh <override_port>         # ctrl-c to exit
 
 # docker
 docker build -t hello-world -f Dockerfile.web .
-docker run -it --rm -p 80:5000 hello-world
-docker exec -it hello-world bash
+docker run -it --rm -p 80:3000 hello-world      # ctrl-c to exit
+docker exec -it hello-world bash                # ctrl-d to exit
 
 # docker-compose
 docker-compose build --no-cache --parallel
