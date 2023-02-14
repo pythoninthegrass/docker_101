@@ -16,8 +16,11 @@
     # run image with interactive tty and remove container after
     docker run -it --rm helloworld
 
-    # run image with volume mount and map port
-    docker run -it --rm -v $(pwd):/app -p 3000:3000 helloworld
+    # override entrypoint
+    docker run -it --rm --entrypoint=bash helloworld
+
+    # run image with volume mount and published port (host:container)
+    docker run -it --rm -v $(pwd):/app -p 80:5000 helloworld
 
     # run image in background (detached) with shortened name 'hello'
     docker run -it -d --name hello helloworld
