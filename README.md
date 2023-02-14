@@ -68,6 +68,7 @@ docker-compose up -d
 docker-compose down --remove-orphans
 
 # justfile
+just                                            # list all options
 ## docker
 just run                                        # ctrl-c to exit
 just exec                                       # ctrl-d to exit
