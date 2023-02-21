@@ -1,5 +1,3 @@
-# -*- mode: GNUmakefile; indent-tabs-mode: t -*-
-
 # TODO: debug why it immediately crashes current terminal on macOS
 
 .DEFAULT_GOAL	:= help
