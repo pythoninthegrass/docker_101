@@ -18,7 +18,7 @@ all: help homebrew just install xcode
 
 check:  ## verify running on macOS
 	@echo "Verifying macOS..."
-	$(shell if [ "$(UNAME)" != "Darwin" ]; then echo "Not running on macOS"; exit 1; fi)
+	$(shell [[ "${UNAME}" != "Darwin" ]] && echo "Not running on macOS"; exit 1)
 
 xcode:  check ## install xcode command line tools
 	@echo "Installing Xcode command line tools..."
