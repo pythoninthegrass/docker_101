@@ -1,7 +1,9 @@
-# TODO: debug why it immediately crashes current terminal on macOS
+# TODO: debug why it immediately crashes bash shell on macOS (sh is workaround)
+# * see if starship is the culprit (executing `sh` or `zsh` works as expected)
+# * `bash -c make` works as expected 🧐
 
 .DEFAULT_GOAL	:= help
-SHELL 			:= /bin/bash
+SHELL 			:= /bin/sh
 UNAME 			:= $(shell uname -s)
 
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -17,6 +19,7 @@ all: check help homebrew just install xcode
 check:  ## verify running on macOS
 	@echo "Verifying macOS..."
 	$(shell [[ "${UNAME}" != "Darwin" ]] && echo "Not running on macOS"; exit 1)
+	@echo "Success!"
 
 xcode:  check ## install xcode command line tools
 	@echo "Installing Xcode command line tools..."
@@ -35,7 +38,7 @@ install: xcode homebrew just  ## install all dependencies
 help: ## Show this help.
 	@echo ''
 	@echo 'Usage:'
-	@echo '  ${YELLOW}make${RESET} ${GREEN}<target>${RESET}'
+	@echo '    ${YELLOW}make${RESET} ${GREEN}<target>${RESET}'
 	@echo ''
 	@echo 'Targets:'
 	@awk 'BEGIN {FS = ":.*?## "} { \
