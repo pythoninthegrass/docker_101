@@ -14,7 +14,7 @@ RESET  := $(shell tput -Txterm sgr0)
 
 .PHONY: all
 
-all: help homebrew just install xcode
+all: check help homebrew just install xcode
 
 check:  ## verify running on macOS
 	@echo "Verifying macOS..."
