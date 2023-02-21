@@ -1,9 +1,10 @@
 # -*- mode: GNUmakefile; indent-tabs-mode: t -*-
 
-# TODO: debug why it immediately crashes current terminal
+# TODO: debug why it immediately crashes current terminal on macOS
 
-SHELL 			:= /bin/bash
 .DEFAULT_GOAL	:= help
+SHELL 			:= /bin/bash
+UNAME 			:= $(shell uname -s)
 
 GREEN  := $(shell tput -Txterm setaf 2)
 YELLOW := $(shell tput -Txterm setaf 3)
@@ -15,17 +16,21 @@ RESET  := $(shell tput -Txterm sgr0)
 
 all: help homebrew just install xcode
 
-xcode:  ## install xcode command line tools
+check:  ## verify running on macOS
+	@echo "Verifying macOS..."
+	$(shell if [ "$(UNAME)" != "Darwin" ]; then echo "Not running on macOS"; exit 1; fi)
+
+xcode:  check ## install xcode command line tools
 	@echo "Installing Xcode command line tools..."
-	$(xcode-select --install)
+	$(shell xcode-select --install)
 
-homebrew:  ## install homebrew
+homebrew:  check ## install homebrew
 	@echo "Installing Homebrew..."
-	$(/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+	$(shell /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
 
-just:  ## install justfile
+just:  check ## install justfile
 	@echo "Installing Justfile..."
-	$(brew install just)
+	$(shell brew install just)
 
 install: xcode homebrew just  ## install all dependencies
 
