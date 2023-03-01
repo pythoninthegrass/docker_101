@@ -3,13 +3,17 @@
 # load .env
 set dotenv-load
 
+# positional params
+set positional-arguments
+
 # set env var
-export APP      := `echo ${APP_NAME}`
-export IMAGE	:= `echo ${IMAGE}`
-export POETRY   := `echo ${POETRY}`
-export PY_VER   := `echo ${PY_VER}`
-export SCRIPT   := "startup.sh"
-export SHELL	:= "/bin/bash"
+export APP      := `echo ${APP_NAME:-"docker_101}`
+export CWD      := `echo $(pwd)`
+export IMAGE	:= `echo ${IMAGE:-"python3.10.9-slim-bullseye:latest"}`
+export POETRY   := `echo ${POETRY:-"1.3.2"}`
+export PY_VER   := `echo ${PY_VER:-"3.10.9"}`
+export SCRIPT   := `echo ${SCRIPT:-"startup.sh"}`
+export SHELL    := `echo ${SHELL:-"/bin/bash"}`
 export TAG		:= `git rev-parse --short HEAD`
 VERSION 		:= `cat VERSION`
 
@@ -38,7 +42,7 @@ default:
 	just --list
 
 # [init]     install dependencies, tooling, and virtual environment
-install:
+install args=CWD:
     #!/usr/bin/env bash
     set -euxo pipefail
 
@@ -98,26 +102,28 @@ install:
     # create virtual environment
     poetry config virtualenvs.in-project true
     poetry env use python
-    poetry install --no-root
+    poetry --directory {{args}} install --no-root
 
 # [deps]     update dependencies
-update-deps:
-    #!/usr/bin/env bash
-    # set -euxo pipefail
-    find . -maxdepth 3 -name "pyproject.toml" -exec \
-        echo "[{}]" \; -exec \
-        echo "Clearing pypi cache..." \; -exec \
-        poetry cache clear --all pypi --no-ansi \; -exec \
-        poetry update --lock --no-ansi \;
+update-deps args=CWD:
+	#!/usr/bin/env bash
+	# set -euxo pipefail
+	args=$(realpath {{args}})
+	find "${args}" -maxdepth 3 -name "pyproject.toml" -exec \
+		echo "[{}]" \; -exec \
+		echo "Clearing pypi cache..." \; -exec \
+		poetry --directory "${args}" cache clear --all pypi --no-ansi \; -exec \
+		poetry --directory "${args}" update --lock --no-ansi \;
 
 # [deps]     export requirements.txt
-export-reqs: update-deps
-    #!/usr/bin/env bash
-    # set -euxo pipefail
-    find . -maxdepth 3 -name "pyproject.toml" -exec \
-        echo "[{}]" \; -exec \
-        echo "Exporting requirements.txt..." \; -exec \
-        poetry export --no-ansi --without-hashes --output requirements.txt \;
+export-reqs args=CWD: update-deps
+	#!/usr/bin/env bash
+	# set -euxo pipefail
+	args=$(realpath {{args}})
+	find "${args}" -maxdepth 3 -name "pyproject.toml" -exec \
+		echo "[{}]" \; -exec \
+		echo "Exporting requirements.txt..." \; -exec \
+		poetry --directory "${args}" export --no-ansi --without-hashes --output requirements.txt \;
 
 # [git]      update git submodules
 sub:
