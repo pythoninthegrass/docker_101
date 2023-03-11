@@ -10,7 +10,7 @@ packages = [{include = "docker_101"}]
 python = "^3.11"
 fastapi = "^0.91.0"
 gunicorn = "^20.1.0"
-uvicorn = "^0.20.0"
+uvicorn = "^0.21.0"
 
 [tool.poetry.group.dev.dependencies]
 icecream = "^2.1.3"
