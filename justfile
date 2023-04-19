@@ -7,10 +7,13 @@ set dotenv-load
 set positional-arguments
 
 # set env var
-export APP      := `echo ${APP_NAME:-"docker_101}`
+export APP      := `echo ${APP_NAME:-"docker_101"}`
+export CPU      := `echo ${CPU:-"4"}`
 export CWD      := `echo $(pwd)`
 export IMAGE	:= `echo ${IMAGE:-"python3.11-slim-bullseye:latest"}`
+export MEM      := `echo ${MEM:-"4096"}`
 export POETRY   := `echo ${POETRY:-"1.4.2"}`
+export PROF     := `echo ${PROF:-"default"}`
 export PY_VER   := `echo ${PY_VER:-"3.11.3"}`
 export SCRIPT   := `echo ${SCRIPT:-"startup.sh"}`
 export SHELL    := `echo ${SHELL:-"/bin/bash"}`
