@@ -62,6 +62,6 @@
     asdf global poetry latest
 
     # Install via asdf w/version
-    ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org asdf install poetry 1.3.2
-    asdf local poetry latest    # 1.3.2
+    ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org asdf install poetry 1.4.2
+    asdf local poetry latest    # 1.4.2
     ```

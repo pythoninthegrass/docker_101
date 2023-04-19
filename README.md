@@ -43,7 +43,7 @@ Development environments and tooling are first-class citizens on macOS and *nix.
 ```bash
 # install python w/asdf
 asdf list python
-asdf install python 3.11.1
+asdf install python 3.11.3
 
 # create virtual environment
 poetry config virtualenvs.in-project true
