@@ -11,6 +11,8 @@ export PATH="${VENV}/bin:$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
 # . "${VENV}/bin/activate"
 
+BASE_DIR="$(dirname "$(readlink -f "$0")")"
+
 move_port() {
 	echo "Port $1 is in use, trying $PORT"
 	while [ ! -z "$(lsof -i :$PORT | grep LISTEN | awk '{print $2}')" ]; do
@@ -29,8 +31,17 @@ port_check() {
 	[ -z "$(lsof -i :$PORT | grep LISTEN | awk '{print $2}')" ] || move_port "$PORT"
 }
 
+server() {
+	# gunicorn/uvicorn
+	gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app -b "0.0.0.0:${PORT}" --log-file -
+
+	# django
+	# SRV_DIR="${BASE_DIR}/app/commerce"
+	# python "${SRV_DIR}/manage.py" runserver
+}
+
 main() {
 	port_check "$@"
-	gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app -b "0.0.0.0:${PORT}" --log-file -
+	server
 }
 main "$@"
