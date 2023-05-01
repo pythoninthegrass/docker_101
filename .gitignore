@@ -8,6 +8,7 @@ django/manage.py
 *.key
 raw/
 gitleaks_report*.json
+~$*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
