@@ -4,6 +4,7 @@ presenter-notes: text-scale(1.5), alignment(left), Helvetica
 slidenumbers: false
 theme: Work 2.0
 
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8), alignment(center)]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
@@ -13,6 +14,7 @@ theme: Work 2.0
 
 ---
 
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
@@ -31,6 +33,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 ---
 
+[.background-color: #f9f8f7]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
 ## Topics
@@ -47,6 +50,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 ---
 
+[.background-color: #f9f8f7]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
 ## Topics
@@ -63,13 +67,18 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 ---
 
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.background-color: #f9f8f7]
+[.text: text-scale(0.6)]
+[.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: alignment(left), line-height(1.0)]
 
-## TODO: [Star Wars ASCII Container](https://github.com/gabe565/ascii-movie)
+## Brief History of Containers
 
-```
-docker run --rm -it ghcr.io/gabe565/ascii-movie play
-```
+![original, fill, 57%](img/container_history.jpg)
+
+<!-- TODO: put in footer or move below header 2 -->
+[Containerization History - Docker Handbook](https://borosan.gitbook.io/docker-handbook/containerization-history)
 
 ---
 
@@ -88,21 +97,106 @@ docker run --rm -it ghcr.io/gabe565/ascii-movie play
 
 ---
 
+[.background-color: #f9f8f7]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
 ## Setup
 
 Instructions for macOS below ([Windows](https://docs.docker.com/desktop/install/windows-install/), [Linux](https://docs.docker.com/desktop/install/linux-install/#generic-installation-steps))
 
-![inline](img/setup.png)
+![inline, 125%](img/setup.png)
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
+[.text: text-scale(0.8)]
+[.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: alignment(left), line-height(1.0)]
+
+## `Dockerfile` vs. `docker-compose.yml`
+
+[.column]
+### `Dockerfile`
+```docker
+FROM awesome/webapp
+COPY . /usr/src/app
+CMD ["python", "app.py"]
+```
+
+[.column]
+### `docker-compose.yml`
+```yaml
+services:
+  frontend:
+    image: awesome/webapp
+    ports:
+      - "443:8043"
+    networks:
+      - front-tier
+      - back-tier
+    configs:
+      - httpd-config
+    secrets:
+      - server-certificate
+
+  backend:
+    image: awesome/database
+    volumes:
+      - db-data:/etc/data
+    networks:
+      - back-tier
+
+volumes:
+  db-data:
+    driver: flocker
+    driver_opts:
+      size: "10GiB"
+
+configs:
+  httpd-config:
+    external: true
+
+secrets:
+  server-certificate:
+    external: true
+
+networks:
+  # The presence of these objects is sufficient to define them
+  front-tier: {}
+  back-tier: {}
+```
+
+---
+
+[.background-color: #f9f8f7]
+[.text: text-scale(0.8)]
+[.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: alignment(left), line-height(1.0)]
+
+## `Dockerfile` vs. `docker-compose.yml`
+
+[.column]
+### `Dockerfile`
+* Domain Specific Language (DSL)
+* Builds an image
+* Interpreted
+
+[.column]
+### `docker-compose.yml`
+* Yet Another Markup Language (YAML)
+* Definines services, networks, and volumes for a Docker application
+  * Can build local image from `Dockerfile` or use remote image on a container registry
+* Runtime based on element level and global directives
+
+---
+
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 [.code: Menlo, text-scale(2.0), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
@@ -167,7 +261,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -231,7 +325,7 @@ ENTRYPOINT ["python", "main.py"]
 ```
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -295,7 +389,7 @@ ENTRYPOINT ["python", "main.py"]
 ```
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -357,7 +451,7 @@ ENTRYPOINT ["python", "main.py"]
 ```
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -420,7 +514,7 @@ ENTRYPOINT ["python", "main.py"]
 ```
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -483,7 +577,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -550,7 +644,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -615,7 +709,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -684,7 +778,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -749,7 +843,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 <!-- [.footer-style: alignment(left)] -->
 
@@ -774,7 +868,7 @@ The `CMD` instruction has three forms:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 
 ## Dockerfile
@@ -837,7 +931,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 
 ## Dockerfile
@@ -900,7 +994,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 
 ## Dockerfile
@@ -963,7 +1057,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
 
 ## Dockerfile
@@ -1033,7 +1127,7 @@ ENTRYPOINT ["python", "main.py"]
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.7)]
 
 ## Dockerfile
@@ -1054,7 +1148,7 @@ But then...
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(0.7)]
 
 ## Dockerfile
@@ -1076,7 +1170,7 @@ __Ergo__, declaring a `VOLUME` in a `Dockerfile` is __useless__*.
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 
 ## Docker Commands
@@ -1105,7 +1199,7 @@ docker run -it -d -name hello helloworld
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 1-3]
 
@@ -1135,7 +1229,7 @@ docker run -it -d -name hello helloworld
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 3-6]
 
@@ -1165,7 +1259,7 @@ docker run -it -d -name hello helloworld
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 7-9]
 
@@ -1195,7 +1289,7 @@ docker run -it -d -name hello helloworld
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 10-12]
 
@@ -1225,7 +1319,7 @@ docker run -it -d -name hello helloworld
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 13-15]
 
@@ -1255,7 +1349,7 @@ docker run -it -d -name hello helloworld
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 16-18]
 
@@ -1285,7 +1379,7 @@ docker run -it -d -name hello helloworld
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 
 ## Docker Compose (file)
@@ -1320,7 +1414,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 1,3,22]
 
@@ -1356,7 +1450,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 1]
 
@@ -1392,7 +1486,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 3-5]
 
@@ -1428,7 +1522,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,6]
 
@@ -1464,7 +1558,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,7,18-20]
 
@@ -1500,7 +1594,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,8]
 
@@ -1542,7 +1636,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,9]
 
@@ -1585,7 +1679,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,10-11]
 
@@ -1621,7 +1715,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,12-13]
 
@@ -1657,7 +1751,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,14-15]
 
@@ -1693,7 +1787,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 4,16-17]
 
@@ -1729,7 +1823,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 21,22-23]
 
@@ -1765,7 +1859,7 @@ networks:
 
 ---
 
-[.background-color: #ffffffff]
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 [.code-highlight: 21,22-24]
 
@@ -1807,7 +1901,198 @@ networks:
 
 ---
 
-<!-- TODO: Docker Compose (commands) -->
+[.background-color: #f9f8f7]
+[.text: text-scale(1.0)]
+[.code-highlight: all]
+
 ## Docker Compose (commands)
 
+```bash
+# clean build (remove --no-cache for speed,
+docker-compose build - -no-cache - -parallel
+
+# start container
+docker-compose up - -remove-orphans -d
+
+# exec into container
+docker attach hello
+
+# stop container
+docker-compose stop
+
+# destroy container and network
+docker-compose down
+```
+
 ---
+
+[.background-color: #f9f8f7]
+[.text: text-scale(1.0)]
+[.code-highlight: 1-2]
+
+## Docker Compose (commands)
+
+```bash
+# clean build (remove --no-cache for speed,
+docker-compose build - -no-cache - -parallel
+
+# start container
+docker-compose up - -remove-orphans -d
+
+# exec into container
+docker attach hello
+
+# stop container
+docker-compose stop
+
+# destroy container and network
+docker-compose down
+```
+
+---
+
+[.background-color: #f9f8f7]
+[.text: text-scale(1.0)]
+[.code-highlight: 4-5]
+
+## Docker Compose (commands)
+
+```bash
+# clean build (remove --no-cache for speed,
+docker-compose build - -no-cache - -parallel
+
+# start container
+docker-compose up - -remove-orphans -d
+
+# exec into container
+docker attach hello
+
+# stop container
+docker-compose stop
+
+# destroy container and network
+docker-compose down
+```
+
+---
+
+[.background-color: #f9f8f7]
+[.text: text-scale(1.0)]
+[.code-highlight: 7-8]
+
+## Docker Compose (commands)
+
+```bash
+# clean build (remove --no-cache for speed,
+docker-compose build - -no-cache - -parallel
+
+# start container
+docker-compose up - -remove-orphans -d
+
+# exec into container
+docker attach hello
+
+# stop container
+docker-compose stop
+
+# destroy container and network
+docker-compose down
+```
+
+---
+
+[.background-color: #f9f8f7]
+[.text: text-scale(1.0)]
+[.code-highlight: 10-11]
+
+## Docker Compose (commands)
+
+```bash
+# clean build (remove --no-cache for speed,
+docker-compose build - -no-cache - -parallel
+
+# start container
+docker-compose up - -remove-orphans -d
+
+# exec into container
+docker attach hello
+
+# stop container
+docker-compose stop
+
+# destroy container and network
+docker-compose down
+```
+
+---
+
+[.background-color: #f9f8f7]
+[.text: text-scale(1.0)]
+[.code-highlight: 13-14]
+
+## Docker Compose (commands)
+
+```bash
+# clean build (remove --no-cache for speed,
+docker-compose build --no-cache - -parallel
+
+# start container
+docker-compose up --remove-orphans -d
+
+# exec into container
+docker attach hello
+
+# stop container
+docker-compose stop
+
+# destroy container and network
+docker-compose down
+```
+
+---
+
+[.background-color: #f9f8f7]
+[.header: text-scale(3.8), alignment(center)]
+[.text: text-scale(0.8), alignment(center)]
+[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+
+# Demo Time
+
+<!-- TODO: embedded jupyter notebook? -->
+
+<!-- https://rew-online.com/demolition-one-of-the-last-ways-to-deregulate-a-building/ -->
+
+---
+
+[.background-color: #f9f8f7]
+[.header: text-scale(4.0), alignment(center)]
+[.text: text-scale(0.8), alignment(center)]
+[.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+
+<!-- TODO: embedded jupyter notebook? -->
+## [Star Wars ASCII Container](https://github.com/gabe565/ascii-movie)
+
+![fill](img/death_star_1920x1080.png)
+
+```
+docker run --rm -it ghcr.io/gabe565/ascii-movie play
+```
+
+---
+
+[.background-color: #f9f8f7]
+[.header: text-scale(3.5), alignment(center)]
+[.text: text-scale(0.8), alignment(left)]
+[.code: Menlo, text-scale(0.7), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+
+# Thank You!
+
+* [Hartwig Staffing](https://hartwigstaffing.com/)
+* [OKC Coffee & Code](https://www.meetup.com/okccoffeeandcode/)
+* [Techlahoma](https://www.techlahoma.org/)
+* [Gabe Cook](https://github.com/gabe565)
+  * For salvaging the `telnet` [Star Wars ASCII video](https://github.com/gabe565/ascii-movie) and leveling it up
