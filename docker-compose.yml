@@ -5,8 +5,8 @@ services:
     container_name: hello-world
     platform: linux/amd64         # linux/amd64 / linux/arm64/v8
     image: hello-world
-    tty: false                    # false for `entrypoint` in Dockerfile
-    stdin_open: false             # false for `entrypoint` in Dockerfile
+    tty: true                     # false for `entrypoint` in Dockerfile
+    stdin_open: true              # false for `entrypoint` in Dockerfile
     env_file:
       - ./.env
     environment:
@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - ${OVER_PORT:-$PORT}:${OVER_PORT:-$PORT}
+      - ${PORT:-3000}:${PORT:-3000}
     build:
       context: ./
       dockerfile: ./Dockerfile.web
