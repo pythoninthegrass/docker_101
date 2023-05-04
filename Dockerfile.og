@@ -4,7 +4,7 @@ FROM python:3.11-slim-bullseye
 ARG DEBIAN_FRONTEND=noninteractive
 
 # install dependencies
-RUN apt -qq update && apt -qq install curl gcc lsof python3-dev
+RUN apt -qq update && apt -qq install -y curl gcc lsof python3-dev
 RUN rm -rf /var/lib/apt/lists/*
 
 # pip env vars
@@ -36,5 +36,8 @@ RUN poetry install --no-ansi --no-root --without dev
 # listening port (not published)
 EXPOSE 3000
 
-ENTRYPOINT ["python", "main.py"]
-# CMD ["default", "arg"]
+# ENTRYPOINT ["python", "main.py"]
+# ENTRYPOINT ["poetry", "shell"]
+CMD ["/bin/bash"]
+# TODO: `TypeError: FastAPI.__call__() missing 1 required positional argument: 'send'`
+# CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
