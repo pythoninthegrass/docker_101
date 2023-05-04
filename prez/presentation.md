@@ -1407,10 +1407,30 @@ docker run -it -d -name hello helloworld
 ---
 
 [.background-color: #f9f8f7]
+[.header: text-scale(2.0), alignment(center)]
+[.text: text-scale(0.8), alignment(center)]
+[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+
+## Demo Time
+### Dockerfile
+
+<!-- TODO: embedded jupyter notebook? -->
+
+<!-- https://rew-online.com/demolition-one-of-the-last-ways-to-deregulate-a-building/ -->
+
+---
+
+[.background-color: #f9f8f7]
+
+<!-- BLANK SLIDE -->
+
+---
+
+[.background-color: #f9f8f7]
 [.text: text-scale(1.0)]
 
 ## Docker Compose (file)
-### bird's eye view
+### Bird's Eye View
 
 ```yaml
 version: "3.9"
@@ -2079,15 +2099,22 @@ docker-compose down
 ---
 
 [.background-color: #f9f8f7]
-[.header: text-scale(3.8), alignment(center)]
+[.header: text-scale(2.0), alignment(center)]
 [.text: text-scale(0.8), alignment(center)]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
-# Demo Time
+## Demo Time
+### Docker Compose
 
 <!-- TODO: embedded jupyter notebook? -->
 
 <!-- https://rew-online.com/demolition-one-of-the-last-ways-to-deregulate-a-building/ -->
+
+---
+
+[.background-color: #f9f8f7]
+
+<!-- BLANK SLIDE -->
 
 ---
 
@@ -2123,3 +2150,18 @@ docker run --rm -it ghcr.io/gabe565/ascii-movie play
 * [Techlahoma](https://www.techlahoma.org/)
 * [Gabe Cook](https://github.com/gabe565)
   * For salvaging the `telnet` [Star Wars ASCII video](https://github.com/gabe565/ascii-movie) and leveling it up
+
+---
+
+[.background-color: #f9f8f7]
+[.header: text-scale(3.5), alignment(center)]
+[.text: text-scale(0.8), alignment(center)]
+[.code: Menlo, text-scale(0.7), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+
+## Repo (One Last Time)
+
+[https://github.com/pythoninthegrass/docker_101](https://github.com/pythoninthegrass/docker_101)
+
+![inline](img/qr.png)
