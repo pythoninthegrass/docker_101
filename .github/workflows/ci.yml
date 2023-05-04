@@ -5,7 +5,9 @@ on:
     - cron: "0 10 * * *"
   push:
     branches:
-      - "**"
+      # - "**"
+      - "main"
+      # - "dev"
     tags:
       - "v*.*.*"
   pull_request:
