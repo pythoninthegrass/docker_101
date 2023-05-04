@@ -26,7 +26,7 @@
     docker run -it -d --name hello helloworld
 
     # exec into container
-    docker attach hello
+    docker exec -it helloworld bash
 
     # stop container
     docker stop hello
@@ -48,7 +48,7 @@
     # start container
     docker-compose up --remove-orphans -d
 
-    # exec into container
+    # ssh into container (`exec` is more useful if the entrypoint is running a process/server)
     docker attach hello
 
     # stop container
