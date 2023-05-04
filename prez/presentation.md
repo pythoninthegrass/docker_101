@@ -1,16 +1,19 @@
 autoscale: false
-footer: Docker 101 @ Pythonistas
+footer: Intro to Docker @ Pythonistas
 presenter-notes: text-scale(1.5), alignment(left), Helvetica
 slidenumbers: false
 theme: Work 2.0
 
 [.background-color: #f9f8f7]
+[.header: text-scale(1.4)]
 [.text: text-scale(0.8), alignment(center)]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
 # Intro to Docker
 
-![inline, fill, 119%](img/whale.png) ![inline, 135%](img/avocado.png)
+![left, original, 118%](img/whale.png) 
+
+![right, original, 145%](img/avocado.png)
 
 ---
 
@@ -33,6 +36,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 ---
 
+[.header: text-scale(1.4)]
 [.background-color: #f9f8f7]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
@@ -40,6 +44,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 **Covered**
 
+* Brief explanation and history
 * Setup environment
 * Dockerfile
 * Docker Compose
@@ -50,6 +55,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 ---
 
+[.header: text-scale(1.4)]
 [.background-color: #f9f8f7]
 [.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
 
@@ -68,17 +74,38 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 ---
 
 [.background-color: #f9f8f7]
+[.text: text-scale(0.8)]
+[.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: alignment(left), line-height(1.0)]
+
+## Brief Explanation of Containers 
+### [^freecodecamp]
+
+[.column]
+### Virtual Machines
+![original](img/vm_diagram.png)
+
+[.column]
+### Containers
+![original](img/container_diagram.png)
+
+[^freecodecamp]: [Docker vs Virtual Machine (VM) – Key Differences You Should Know](https://www.freecodecamp.org/news/docker-vs-vm-key-differences-you-should-know/)
+
+---
+
+[.background-color: #f9f8f7]
 [.text: text-scale(0.6)]
 [.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
 [.code-highlight: all]
 [.footer-style: alignment(left), line-height(1.0)]
 
-## Brief History of Containers
+## Brief History of Containers 
+### [^docker-handbook]
 
 ![original, fill, 57%](img/container_history.jpg)
 
-<!-- TODO: put in footer or move below header 2 -->
-[Containerization History - Docker Handbook](https://borosan.gitbook.io/docker-handbook/containerization-history)
+[^docker-handbook]: [Containerization History - Docker Handbook](https://borosan.gitbook.io/docker-handbook/containerization-history)
 
 ---
 
