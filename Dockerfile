@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # ! missing arg (`-y`), 2 layers, no multi-stage
 # install dependencies
-RUN apt -qq update && apt -qq install curl gcc lsof python3-dev
+RUN apt -qq update && apt -qq install -y curl gcc lsof python3-dev
 RUN rm -rf /var/lib/apt/lists/*
 
 # pip env vars
