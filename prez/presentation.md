@@ -2014,7 +2014,7 @@ docker-compose down
 docker-compose build --no-cache --parallel
 
 # start container
-docker-compose up - -remove-orphans -d
+docker-compose up --remove-orphans -d
 
 # exec into container
 docker attach hello
@@ -2036,10 +2036,10 @@ docker-compose down
 
 ```bash
 # clean build (remove --no-cache for speed,
-docker-compose build - -no-cache - -parallel
+docker-compose build --no-cache --parallel
 
 # start container
-docker-compose up - -remove-orphans -d
+docker-compose up --remove-orphans -d
 
 # exec into container
 docker attach hello
@@ -2061,7 +2061,7 @@ docker-compose down
 
 ```bash
 # clean build (remove --no-cache for speed,
-docker-compose build --no-cache - -parallel
+docker-compose build --no-cache --parallel
 
 # start container
 docker-compose up --remove-orphans -d
