@@ -7,7 +7,7 @@ theme: Work 2.0
 [.background-color: #f9f8f7]
 [.header: text-scale(1.4)]
 [.text: text-scale(0.8), alignment(center)]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 # Intro to Docker
 
@@ -19,7 +19,7 @@ theme: Work 2.0
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Intro
 
@@ -38,7 +38,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 [.header: text-scale(1.4)]
 [.background-color: #f9f8f7]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Topics
 
@@ -57,7 +57,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 
 [.header: text-scale(1.4)]
 [.background-color: #f9f8f7]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Topics
 
@@ -77,7 +77,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 [.text: text-scale(0.8)]
 [.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Brief Explanation of Containers 
 ### [^freecodecamp]
@@ -98,7 +98,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 [.text: text-scale(0.6)]
 [.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Brief History of Containers 
 ### [^docker-handbook]
@@ -125,7 +125,7 @@ Extracurriculars include community organizing with [Pythonistas](https://www.mee
 ---
 
 [.background-color: #f9f8f7]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Setup
 
@@ -139,7 +139,7 @@ Instructions for macOS below ([Windows](https://docs.docker.com/desktop/install/
 [.text: text-scale(0.8)]
 [.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## `Dockerfile` vs. `docker-compose.yml`
 
@@ -200,7 +200,7 @@ networks:
 [.text: text-scale(0.8)]
 [.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## `Dockerfile` vs. `docker-compose.yml`
 
@@ -223,7 +223,7 @@ networks:
 [.text: text-scale(0.8)]
 [.code: Menlo, text-scale(2.0), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
@@ -290,13 +290,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`FROM`](https://docs.docker.com/engine/reference/builder/#from)
@@ -354,13 +355,15 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
+
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`ARG`](https://docs.docker.com/engine/reference/builder/#arg)
@@ -418,13 +421,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`ENV`](https://docs.docker.com/engine/reference/builder/#env)
@@ -480,13 +484,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`RUN`](https://docs.docker.com/engine/reference/builder/#run)
@@ -543,7 +548,7 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
@@ -606,13 +611,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`COPY`](https://docs.docker.com/engine/reference/builder/#copy)
@@ -673,13 +679,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`EXPOSE`](https://docs.docker.com/engine/reference/builder/#expose)
@@ -738,13 +745,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint)
@@ -807,13 +815,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`CMD`](https://docs.docker.com/engine/reference/builder/#cmd)
@@ -872,13 +881,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.8)]
-<!-- [.footer-style: alignment(left)] -->
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`CMD`](https://docs.docker.com/engine/reference/builder/#cmd)
@@ -966,6 +976,7 @@ ENTRYPOINT ["python", "main.py"]
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`VOLUME`](https://docs.docker.com/engine/reference/builder/#volume)
@@ -1029,6 +1040,7 @@ ENTRYPOINT ["python", "main.py"]
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`VOLUME`](https://docs.docker.com/engine/reference/builder/#volume)
@@ -1092,6 +1104,7 @@ ENTRYPOINT ["python", "main.py"]
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`VOLUME`](https://docs.docker.com/engine/reference/builder/#volume)
@@ -1156,12 +1169,14 @@ ENTRYPOINT ["python", "main.py"]
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.7)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
 ### Common Directives
 
 [.code: Menlo, text-scale(1.0), line-height(0.8), alignment(left)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 [.column]
 [`VOLUME`](https://docs.docker.com/engine/reference/builder/#volume)
@@ -1177,6 +1192,7 @@ But then...
 
 [.background-color: #f9f8f7]
 [.text: text-scale(0.7)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Dockerfile
 
@@ -1409,7 +1425,7 @@ docker run -it -d -name hello helloworld
 [.background-color: #f9f8f7]
 [.header: text-scale(2.0), alignment(center)]
 [.text: text-scale(0.8), alignment(center)]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Demo Time
 ### Dockerfile
@@ -1421,6 +1437,7 @@ docker run -it -d -name hello helloworld
 ---
 
 [.background-color: #f9f8f7]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 <!-- BLANK SLIDE -->
 
@@ -2101,7 +2118,7 @@ docker-compose down
 [.background-color: #f9f8f7]
 [.header: text-scale(2.0), alignment(center)]
 [.text: text-scale(0.8), alignment(center)]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Demo Time
 ### Docker Compose
@@ -2113,43 +2130,19 @@ docker-compose down
 ---
 
 [.background-color: #f9f8f7]
-
-<!-- BLANK SLIDE -->
-
----
-
-[.background-color: #f9f8f7]
-[.header: text-scale(4.0), alignment(center)]
-[.text: text-scale(0.8), alignment(center)]
-[.code: Menlo, text-scale(0.8), line-height(0.8), alignment(left)]
-[.code-highlight: all]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
-
-<!-- TODO: embedded jupyter notebook? -->
-## [Star Wars ASCII Container](https://github.com/gabe565/ascii-movie)
-
-![fill](img/death_star_1920x1080.png)
-
-```
-docker run --rm -it ghcr.io/gabe565/ascii-movie play
-```
-
----
-
-[.background-color: #f9f8f7]
 [.header: text-scale(3.5), alignment(center)]
 [.text: text-scale(0.8), alignment(left)]
 [.code: Menlo, text-scale(0.7), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 # Thank You!
 
 * [Hartwig Staffing](https://hartwigstaffing.com/)
 * [OKC Coffee & Code](https://www.meetup.com/okccoffeeandcode/)
 * [Techlahoma](https://www.techlahoma.org/)
-* [Gabe Cook](https://github.com/gabe565)
-  * For salvaging the `telnet` [Star Wars ASCII video](https://github.com/gabe565/ascii-movie) and leveling it up
+* [Gabe Cook](https://github.com/gabe565) @gabe565
+  * For salvaging the [legendary `telnet` ASCII video](https://github.com/gabe565/ascii-movie) and leveling it up
 
 ---
 
@@ -2158,10 +2151,39 @@ docker run --rm -it ghcr.io/gabe565/ascii-movie play
 [.text: text-scale(0.8), alignment(center)]
 [.code: Menlo, text-scale(0.7), line-height(0.8), alignment(left)]
 [.code-highlight: all]
-[.footer-style: #2F2F2F, alignment(left), line-height(1.0)]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
 
 ## Repo (One Last Time)
 
 [https://github.com/pythoninthegrass/docker_101](https://github.com/pythoninthegrass/docker_101)
 
 ![inline](img/qr.png)
+
+---
+
+[.background-color: #f9f8f7]
+[.header: text-scale(3.5), alignment(center)]
+[.text: text-scale(0.8), alignment(center)]
+[.code: Menlo, text-scale(0.7), line-height(0.8), alignment(left)]
+[.code-highlight: all]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
+
+# Also...
+
+---
+
+[.background-color: #f9f8f7]
+[.header: text-scale(3.9), alignment(center)]
+[.text: text-scale(1.0), alignment(center)]
+[.code: Menlo, text-scale(1.0), line-height(1.0), alignment(center)]
+[.code-highlight: all]
+[.footer-style: #2F2F2F, text-scale(1.0), alignment(left), line-height(1.0)]
+
+<!-- TODO: embedded jupyter notebook? -->
+# [May the 4th Be With You](https://github.com/gabe565/ascii-movie)
+
+![fill](img/death_star_1920x1080.png)
+
+```
+docker run --rm -it ghcr.io/gabe565/ascii-movie play
+```
