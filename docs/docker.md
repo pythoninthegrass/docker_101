@@ -11,7 +11,7 @@
     docker images
 
     # build docker image and tag
-    docker build -t helloworld .
+    docker build -t helloworld .    # --no-cache=true
 
     # run image with interactive tty and remove container after
     docker run -it --rm helloworld
