@@ -2220,11 +2220,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          # list of Docker images to use as base name for tags
-          # TODO: see above ^^
           images: |
             ${{ env.docker_user }}/${{ env.app_name }}
-          # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
             type=ref,event=branch
@@ -2251,6 +2248,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
+
+<!-- ![inline, fill, 35%](img/ci_docker.png) -->
 
 ---
 
