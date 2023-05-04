@@ -4,7 +4,7 @@ FROM python:3.11-slim-bullseye
 # avoid stuck build due to user prompt
 ARG DEBIAN_FRONTEND=noninteractive
 
-# ! missing arg, 2 layers, no multi-stage
+# ! missing arg (`-y`), 2 layers, no multi-stage
 # install dependencies
 RUN apt -qq update && apt -qq install curl gcc lsof python3-dev
 RUN rm -rf /var/lib/apt/lists/*
@@ -41,11 +41,10 @@ RUN poetry install --no-ansi --no-root --without dev
 # listening port (not published)
 EXPOSE 3000
 
-#! runs as root, no custom PATH (poetry, python)
+#! runs as root
 
-#! hard-coded port
 # ENTRYPOINT ["python", "main.py"]
 ENTRYPOINT ["/bin/sh", "startup.sh"]
-CMD ["5000"]
-# CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
+CMD ["5000"]                                                #! hard-coded port
+# CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]    #! missing poetry call
 # CMD ["/bin/bash"]
