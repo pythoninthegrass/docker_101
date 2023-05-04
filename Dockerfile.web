@@ -97,10 +97,10 @@ WORKDIR /app
 COPY --chown=${USER_NAME} . .
 COPY --from=builder --chown=${USER_NAME} "$VENV" "$VENV"
 
-# * paramterized user
+# * parameterized user
 USER ${USER_NAME}
 
-# * paremeterized ports; can be overridden at runtime
+# * parameterized ports; can be overridden at runtime
 # * and passed to the startup script via shell form
 # listening port (not published)
 EXPOSE ${PORT:-3000}
