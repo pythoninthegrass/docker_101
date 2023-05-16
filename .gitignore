@@ -10,6 +10,7 @@ raw/
 gitleaks_report*.json
 ~$*
 *.pptx
+jupyter_*_config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

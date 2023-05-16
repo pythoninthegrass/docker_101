@@ -49,7 +49,8 @@
     docker-compose up --remove-orphans -d
 
     # ssh into container (`exec` is more useful if the entrypoint is running a process/server)
-    docker attach hello
+    # docker attach hello-world
+    docker exec -it hello-world bash
 
     # stop container
     docker-compose stop

@@ -1979,7 +1979,7 @@ docker-compose build --no-cache --parallel
 docker-compose up --remove-orphans -d
 
 # exec into container
-docker attach hello
+docker exec -it hello-world bash
 
 # stop container
 docker-compose stop
@@ -2004,7 +2004,7 @@ docker-compose build --no-cache --parallel
 docker-compose up --remove-orphans -d
 
 # exec into container
-docker attach hello
+docker exec -it hello-world bash
 
 # stop container
 docker-compose stop
@@ -2029,7 +2029,7 @@ docker-compose build --no-cache --parallel
 docker-compose up --remove-orphans -d
 
 # exec into container
-docker attach hello
+docker exec -it hello-world bash
 
 # stop container
 docker-compose stop
@@ -2054,7 +2054,7 @@ docker-compose build --no-cache --parallel
 docker-compose up --remove-orphans -d
 
 # exec into container
-docker attach hello
+docker exec -it hello-world bash
 
 # stop container
 docker-compose stop
@@ -2079,7 +2079,7 @@ docker-compose build --no-cache --parallel
 docker-compose up --remove-orphans -d
 
 # exec into container
-docker attach hello
+docker exec -it hello-world bash
 
 # stop container
 docker-compose stop
@@ -2104,7 +2104,7 @@ docker-compose build --no-cache --parallel
 docker-compose up --remove-orphans -d
 
 # exec into container
-docker attach hello
+docker exec -it hello-world bash
 
 # stop container
 docker-compose stop
