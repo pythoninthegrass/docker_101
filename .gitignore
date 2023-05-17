@@ -6,8 +6,10 @@ django/manage.py
 !*.example
 *.pem
 *.key
+*.zip
 gif/
 raw/
+revealjs/
 gitleaks_report*.json
 ~$*
 *.pptx
