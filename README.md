@@ -55,12 +55,12 @@ poetry install --no-root
 #### CLI bits
 ```bash
 # poetry
-poetry run ./startup.sh <override_port>         # ctrl-c to exit
+poetry run ./startup.sh <override_port>             # ctrl-c to exit
 
 # docker
-docker build -t hello-world -f Dockerfile.web .
-docker run -it --rm -p 80:3000 hello-world      # ctrl-c to exit
-docker exec -it hello-world bash                # ctrl-d to exit
+docker build -t my-hello-world -f Dockerfile.web .
+docker run -it --rm -p 80:3000 my-hello-world       # ctrl-c to exit
+docker exec -it my-hello-world bash                 # ctrl-d to exit
 
 # docker-compose
 docker-compose build --no-cache --parallel
@@ -68,14 +68,14 @@ docker-compose up -d
 docker-compose down --remove-orphans
 
 # justfile
-just                                            # list all options
+just                                                # list all options
 ## docker
-just run                                        # ctrl-c to exit
-just exec                                       # ctrl-d to exit
+just run                                            # ctrl-c to exit
+just exec                                           # ctrl-d to exit
 ## docker-compose
-just build-clean                                # docker-compose build --no-cache --parallel
-just up                                         # docker-compose up -d
-just down                                       # docker-compose down --remove-orphans
+just build-clean                                    # docker-compose build --no-cache --parallel
+just up                                             # docker-compose up -d
+just down                                           # docker-compose down --remove-orphans
 ```
 #### Clicky-clicky
 Copy the `.env.example` file to `.env` and modify the values as needed.
@@ -103,4 +103,4 @@ Automated CI is implemented via GitHub Actions to build and push this repository
 [Instructions to disable this action](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow) if you don't want this feature.
 
 ## TODO
-* [Open Issues](https://github.com/pythoninthegrass/python_template/issues)
+* [Open Issues](https://github.com/pythoninthegrass/docker_101/issues)

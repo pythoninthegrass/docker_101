@@ -2,11 +2,11 @@ version: "3.9"
 
 services:
   helloworld:
-    container_name: hello-world
-    platform: linux/amd64         # linux/amd64 / linux/arm64/v8
-    image: hello_world
-    tty: true                     # false for `entrypoint` in Dockerfile
-    stdin_open: true              # false for `entrypoint` in Dockerfile
+    container_name: my-hello-world
+    platform: linux/amd64                         # linux/amd64 / linux/arm64/v8
+    # image: jollygoodhorsepower/my-hello-world
+    tty: true                                     # false for `entrypoint` in Dockerfile
+    stdin_open: true                              # false for `entrypoint` in Dockerfile
     env_file:
       - ./.env
     environment:
