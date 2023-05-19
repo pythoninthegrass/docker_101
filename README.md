@@ -22,6 +22,7 @@ Very little of this gets tested on Windows hosts. Windows Subsystem for Linux (W
       * [Clicky-clicky](#clicky-clicky)
   * [Pushing to Docker Hub with CI](#pushing-to-docker-hub-with-ci)
     * [What you need to modify in this file](#what-you-need-to-modify-in-this-file)
+  * [Add git submodules](#add-git-submodules)
   * [TODO](#todo)
 
 ## Setup
@@ -97,6 +98,14 @@ Automated CI is implemented via GitHub Actions to build and push this repository
   * `DOCKERHUB_USER`
 * Add environment variable (image name)
   * `APP_NAME` 
+
+## Add git submodules
+For completeness, add another git repo as a submodule.
+    ```bash
+    git submodule add https://github.com/pythoninthegrass/node_with_docker.git node
+    git submodule update --init --recursive
+    git submodule update --recursive
+    ```
 
 [Instructions to create a token](https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token).
 
