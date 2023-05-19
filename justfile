@@ -133,7 +133,7 @@ sub:
 	@echo "To add a submodule:"
 	@echo "git submodule add https://github.com/username/repo.git path/to/submodule"
 	@echo "Updating all submodules..."
-	git submodule update --init --recursive && git pull --recurse-submodules -j8
+	git submodule update --init --recursive && git pull --recurse-submodules -j$(nproc)
 
 # [git]      update pre-commit hooks
 pre-commit:
