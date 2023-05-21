@@ -1,3 +1,6 @@
 [submodule "node"]
-	path = node
+	path = examples/node
 	url = https://github.com/pythoninthegrass/node_with_docker.git
+[submodule "gatsby"]
+	path = examples/gatsby
+	url = https://github.com/pythoninthegrass/gatsby_docker.git

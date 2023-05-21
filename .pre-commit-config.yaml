@@ -48,7 +48,11 @@ repos:
       exclude: |
           (?x)^(
               .vscode/launch.json|
-              .vscode/settings.json
+              .vscode/settings.json|
+              examples/gatsby/tsconfig.json|
+              examples/node/tsconfig.json|
+              examples/gatsby/package.json|
+              examples/node/package.json
           )$
       args: ['--autofix', '--indent=2', '--no-sort-keys']
     - id: requirements-txt-fixer

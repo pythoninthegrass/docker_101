@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  app:
+    container_name: gatsby-docker
+    # image: gatsby-docker
+    platform: linux/arm64/v8    # linux/amd64
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: server
+    ports:
+      - 8000:8000/tcp
+    command: ./node_modules/.bin/gatsby develop -H 0.0.0.0
+    volumes:
+      - /usr/src/app/node_modules
+      - ./my-gatsby-site:/usr/src/app
+    environment:
+      - NODE_ENV=development
