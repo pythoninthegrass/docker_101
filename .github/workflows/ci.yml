@@ -16,10 +16,46 @@ on:
 
 # TODO: test vars in-line vs. global env
 env:
-  docker_user: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+  GHCR_USER: ${{ github.actor }}
   app_name: ${{ vars.APP_NAME }}
 
 jobs:
+  ghcr:
+    strategy:
+      fail-fast: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            ${{ env.GHCR_USER }}/${{ env.app_name }}
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ env.GHCR_USER }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
   docker:
     strategy:
       fail-fast: true
@@ -32,9 +68,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           # list of Docker images to use as base name for tags
-          # TODO: see above ^^
           images: |
-            ${{ env.docker_user }}/${{ env.app_name }}
+            ${{ env.DOCKER_USER }}/${{ env.app_name }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
