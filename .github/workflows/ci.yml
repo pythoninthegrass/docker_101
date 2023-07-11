@@ -18,7 +18,7 @@ on:
 env:
   DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
   GHCR_USER: ${{ github.actor }}
-  app_name: ${{ vars.APP_NAME }}
+  APP_NAME: ${{ vars.APP_NAME }}
 
 jobs:
   ghcr:
@@ -33,7 +33,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ env.GHCR_USER }}/${{ env.app_name }}
+            ${{ env.GHCR_USER }}/${{ env.APP_NAME }}
           tags: |
             type=schedule
             type=ref,event=branch
@@ -69,7 +69,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ${{ env.DOCKER_USER }}/${{ env.app_name }}
+            ${{ env.DOCKER_USER }}/${{ env.APP_NAME }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
